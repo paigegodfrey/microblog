@@ -15,7 +15,7 @@ function PostView() {
 
   const postComments = comments.filter(c => c.postId === postId);
 
-  console.log(postComments);
+  const remove = () => 
 
   return (
     <div className="PostView">
@@ -23,6 +23,8 @@ function PostView() {
         <h3>{post.title}</h3>
         <p>{post.description}</p>
         <p>{post.body}</p>
+        <button>Edit</button>
+        <button onClick={remove}>Delete</button>
       </div>
       <div>
         <h4>Comments</h4>
