@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import BlogPostContext from "./BlogPostContext";
 import { v4 as uuid } from "uuid";
+import { useParams } from "react-router-dom";
 
-function CommentForm({ post }) {
 
-  const { setComments } = useContext(BlogPostContext);
+function CommentForm({handleAddComment}) {
+
+  const { postId } = useParams();
 
   const INITIAL_STATE = {
     text: ""
@@ -22,13 +23,7 @@ function CommentForm({ post }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setComments(comments => [...comments,
-      {
-        ...formData,
-        id: uuid(),
-        postId: post.id
-      }
-    ]);
+    handleAddComment({postId, comment:{...formData, id:uuid()}});
     setFormData(INITIAL_STATE);
   };
 

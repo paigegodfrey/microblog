@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
-import BlogPostContext from "./BlogPostContext";
+import React from "react";
+import { useSelector } from "react-redux";
 import PostCard from "./PostCard";
 
 function TitleList() {
 
-  const { posts } = useContext(BlogPostContext);
+  const postsObj = useSelector(st => st.posts);
+  
+  const posts = [];
+  
+  for (let [key,value] of Object.entries(postsObj)){
+    posts.push({id: key, post: value})
+  }
+  
 
   return (
     <div>
-      {posts.map(p => <PostCard post={p} key={p.id} id={p.id}/>)}
+      {posts.map(p => <PostCard {...p.post} key={p.id} id={p.id}/>)}
     </div>
   )
 }

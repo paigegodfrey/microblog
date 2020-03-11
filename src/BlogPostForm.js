@@ -1,16 +1,13 @@
-import React, { useState, useContext } from "react";
-import BlogPostContext from "./BlogPostContext";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-function BlogPostForm() {
-
-  const { setPosts } = useContext(BlogPostContext);
+function BlogPostForm({ handleAddPost, title, description, body }) {
 
   const INITIAL_STATE = {
-    title: "",
-    description: "",
-    body: ""
+    title: title || "",
+    description: description || "",
+    body: body || ""
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -26,12 +23,9 @@ function BlogPostForm() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setPosts(posts => [...posts, 
-      {
-        ...formData, 
-        id: uuid()
-      } 
-    ]);
+    const id = uuid();
+    const newPostData = { [id]: { ...formData, comments: [] } };
+    handleAddPost(newPostData);
     setFormData(INITIAL_STATE);
     history.push("/");
   };
