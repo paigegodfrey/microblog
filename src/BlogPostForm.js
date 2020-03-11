@@ -26,7 +26,12 @@ function BlogPostForm() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setPosts(posts => [...posts, {...formData, id: uuid()}]);
+    setPosts(posts => [...posts, 
+      {
+        ...formData, 
+        id: uuid()
+      } 
+    ]);
     setFormData(INITIAL_STATE);
     history.push("/");
   };

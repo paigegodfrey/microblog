@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import BlogPostContext from "./BlogPostContext";
 import { v4 as uuid } from "uuid";
 
-function CommentForm({ post, setComments }) {
+function CommentForm({ post }) {
+
+  const { setComments } = useContext(BlogPostContext);
 
   const INITIAL_STATE = {
-    comment: ""
+    text: ""
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -19,7 +22,13 @@ function CommentForm({ post, setComments }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setComments(comments => [...comments, { ...formData, id: uuid(), postId: post.id }]);
+    setComments(comments => [...comments,
+      {
+        ...formData,
+        id: uuid(),
+        postId: post.id
+      }
+    ]);
     setFormData(INITIAL_STATE);
   };
 
@@ -28,9 +37,9 @@ function CommentForm({ post, setComments }) {
       <form onSubmit={handleSubmit}>
         <input required
           type="text"
-          name="comment"
+          name="text"
           placeholder="New Comment"
-          value={formData.comment}
+          value={formData.text}
           onChange={handleChange}
         />
         <button>Add</button>

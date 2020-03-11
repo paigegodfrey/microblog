@@ -1,19 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import {v4 as uuid } from "uuid";
+// import {v4 as uuid } from "uuid";
 import BlogPostContext from "./BlogPostContext";
 import NotFound from "./NotFound";
-import Comment from './CommentForm';
+import Comment from './Comment';
 import CommentForm from './CommentForm';
 
 function PostView() {
   const { postId } = useParams();
-  const { posts } = useContext(BlogPostContext);
-
-  const [comments, setComments] = useState([]);
+  const { posts, comments } = useContext(BlogPostContext);
 
   const post = posts.filter(p => p.id === postId)[0];
   if (!post) return <NotFound />;
+
+  const postComments = comments.filter(c => c.postId === postId);
+
+  console.log(postComments);
 
   return (
     <div className="PostView">
@@ -24,8 +26,8 @@ function PostView() {
       </div>
       <div>
         <h4>Comments</h4>
-        {comments.map(c => <Comment key={uuid()} post={post} setComments={setComments}/>)}
-        <CommentForm />
+        {postComments.map(c => <Comment key={c.id} comment={c}/>)}
+        <CommentForm post={post}/>
       </div>
     </div>
   )

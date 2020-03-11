@@ -7,11 +7,12 @@ import BlogPostContext from "./BlogPostContext";
 function App() {
 
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
 
   return (
     <div>
       <BrowserRouter>
-        <BlogPostContext.Provider value={{ posts, setPosts }}>
+        <BlogPostContext.Provider value={{ posts, setPosts, comments, setComments }}>
           <Nav />
           <Routes />
         </BlogPostContext.Provider>

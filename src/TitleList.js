@@ -6,8 +6,6 @@ function TitleList() {
 
   const { posts } = useContext(BlogPostContext);
 
-  console.log(posts);
-
   return (
     <div>
       {posts.map(p => <PostCard post={p} key={p.id} id={p.id}/>)}
