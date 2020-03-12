@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { ADD_POST, GET_POSTS, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
 import cloneDeep from 'lodash/cloneDeep';
 
 const INITIAL_STATE = { posts: {} };
@@ -11,6 +11,16 @@ function rootReducer(state = INITIAL_STATE, action) {
   let comment;
 
   switch (action.type) {
+    case GET_POSTS:
+      // where payload is [ { id, title, description, votes }, {...} }
+      let posts = {};
+      let rawPosts = action.payload;
+      rawPosts.forEach(post => {
+        posts[post.id]=post;
+        delete posts[post.id].id;
+      });
+      stateDeepCopy.posts = posts;
+      return stateDeepCopy;
 
     case ADD_POST:
       // where payload is {id: { title, description, body } }
