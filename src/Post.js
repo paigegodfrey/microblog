@@ -47,7 +47,7 @@ function Post() {
     <div>
       {!showEditForm
         ? showPost()
-        : <BlogPostForm handleAddPost={handleAddPost} {...post}/>
+        : <BlogPostForm handleAddPost={handleAddPost} id={postId} {...post}/>
       }
     </div>
   )

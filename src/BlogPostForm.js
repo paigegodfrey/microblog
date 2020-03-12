@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-function BlogPostForm({ handleAddPost, title, description, body }) {
+function BlogPostForm({ handleAddPost, id, title, description, body }) {
 
   const INITIAL_STATE = {
     title: title || "",
@@ -23,8 +23,8 @@ function BlogPostForm({ handleAddPost, title, description, body }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const id = uuid();
-    const newPostData = { [id]: { ...formData, comments: [] } };
+    let postId = id ? id : uuid();
+    const newPostData = { [postId]: { ...formData, comments: [] } };
     handleAddPost(newPostData);
     setFormData(INITIAL_STATE);
     history.push("/");

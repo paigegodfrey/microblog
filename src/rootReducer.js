@@ -12,7 +12,7 @@ function rootReducer(state = INITIAL_STATE, action) {
     case ADD_POST:
       // where payload is {id: { title, description, body } }
       let newPost = action.payload;
-      stateDeepCopy.posts = {...stateDeepCopy.posts, ...newPost}
+      stateDeepCopy.posts = { ...stateDeepCopy.posts, ...newPost }
       return stateDeepCopy;
 
     case DELETE_POST:
@@ -34,7 +34,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         .filter(comment => comment.id !== commentId);
       stateDeepCopy[postIdDelete].comments = updatedComments;
 
-      return { ...stateDeepCopy};
+      return { ...stateDeepCopy };
 
     default:
       return state;

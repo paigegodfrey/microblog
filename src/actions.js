@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
 
 export function addPost(data) {
   return {
