@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function BlogPostForm({ handleAddPost, postId, title, description, body }) {
+function BlogPostForm({ handlePost, postId, title, description, body }) {
   const history = useHistory();
 
   const INITIAL_STATE = {
@@ -12,7 +12,6 @@ function BlogPostForm({ handleAddPost, postId, title, description, body }) {
 
   const [formData, setFormData] = useState(INITIAL_STATE);
 
-  
   const handleChange = evt => {
     const { name, value } = evt.target;
     setFormData(fData => ({
@@ -24,9 +23,11 @@ function BlogPostForm({ handleAddPost, postId, title, description, body }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (postId) {
-      // handleEdit
+      // edits existing post
+      handlePost({id: postId, data: formData});
     } else {
-      handleAddPost(formData);
+      // adds new post
+      handlePost(formData);
     }
     setFormData(INITIAL_STATE);
     history.push("/");

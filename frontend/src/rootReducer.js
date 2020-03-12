@@ -25,7 +25,8 @@ function rootReducer(state = INITIAL_STATE, action) {
     case ADD_POST:
       // where payload is {id: { title, description, body } }
       let newPostData = action.payload;
-      let newPost = { [newPostData.id]: {...newPostData, comments: []} };
+      let comments = newPostData.comments || [];
+      let newPost = { [newPostData.id]: {...newPostData, comments} };
       delete newPost[newPostData.id].id;
 
       stateDeepCopy.posts = { ...stateDeepCopy.posts, ...newPost };

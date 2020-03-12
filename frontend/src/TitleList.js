@@ -18,7 +18,6 @@ function TitleList() {
     posts.push({ id: key, post: value })
   }
 
-
   return (
     <div>
       {posts.map(p => <PostCard {...p.post} key={p.id} id={p.id} />)}

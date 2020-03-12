@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST, GET_POSTS, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, GET_POSTS, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
 import axios from "axios";
 
 const BASE_URL = 'http://localhost:5000';
@@ -31,12 +31,21 @@ function addPost(data) {
   };
 }
 
+export function editPostWithAPI(params) {
+  return async function(dispatch) {
+    let res = await axios.put(`${BASE_URL}/api/posts/${params.id}`, params.data);
+    dispatch(addPost(res.data));
+  };
+}
+
 export function deletePost(data) {
   return {
     type: DELETE_POST,
     payload: data
   };
 }
+
+
 
 export function addComment(data) {
   return {

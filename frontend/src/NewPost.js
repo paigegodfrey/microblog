@@ -13,7 +13,7 @@ function NewPost() {
 
   return (
     <div>
-      <BlogPostForm handleAddPost={handleAddPost} />
+      <BlogPostForm handlePost={handleAddPost} />
     </div>
   )
 }

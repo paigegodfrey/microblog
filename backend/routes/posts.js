@@ -11,7 +11,7 @@ const router = new express.Router();
  * => [ { id,
  *        title,
  *        description,
- *        votes,
+ *        votes
  *      },
  *      ...
  *    ]
