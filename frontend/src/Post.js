@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import { addPost, deletePost, addComment, deleteComment } from './actions';
+import { addPostWithAPI, deletePost, addComment, deleteComment } from './actions';
 import PostView from "./PostView";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -23,7 +23,7 @@ function Post() {
     setShowEditForm(showEditForm => !showEditForm);
   }
   const handleAddPost = (data) => {
-    dispatch(addPost(data));
+    dispatch(addPostWithAPI(data));
   }
   const handleDeletePost = (data) => {
     dispatch(deletePost(data));

@@ -14,8 +14,8 @@ function rootReducer(state = INITIAL_STATE, action) {
     case GET_POSTS:
       // where payload is [ { id, title, description, votes }, {...} }
       let posts = {};
-      let rawPosts = action.payload;
-      rawPosts.forEach(post => {
+      let allPostsData = action.payload;
+      allPostsData.forEach(post => {
         posts[post.id]=post;
         delete posts[post.id].id;
       });
@@ -24,7 +24,10 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     case ADD_POST:
       // where payload is {id: { title, description, body } }
-      let newPost = action.payload;
+      let newPostData = action.payload;
+      let newPost = { [newPostData.id]: {...newPostData, comments: []} };
+      delete newPost[newPostData.id].id;
+
       stateDeepCopy.posts = { ...stateDeepCopy.posts, ...newPost };
       return stateDeepCopy;
 
