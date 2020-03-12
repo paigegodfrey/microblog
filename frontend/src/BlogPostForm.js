@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-function BlogPostForm({ handleAddPost, id, title, description, body }) {
+function BlogPostForm({ handleAddPost, postId, title, description, body }) {
+  const history = useHistory();
 
   const INITIAL_STATE = {
     title: title || "",
@@ -11,7 +12,6 @@ function BlogPostForm({ handleAddPost, id, title, description, body }) {
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
-  const history = useHistory();
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -23,15 +23,14 @@ function BlogPostForm({ handleAddPost, id, title, description, body }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let postId = id ? id : uuid();
-    const newPostData = { [postId]: { ...formData, comments: [] } };
+    let id = postId ? postId : uuid();
+    const newPostData = { [id]: { ...formData, comments: [] } };
     handleAddPost(newPostData);
     setFormData(INITIAL_STATE);
     history.push("/");
   };
 
   const cancel = () => {
-    setFormData(INITIAL_STATE);
     history.push("/");
   }
 
@@ -60,8 +59,8 @@ function BlogPostForm({ handleAddPost, id, title, description, body }) {
           onChange={handleChange}
         />
         <button>Save</button>
-        <button onClick={cancel}>Cancel</button>
       </form>
+      <button onClick={cancel}>Cancel</button>
     </div>
   );
 }

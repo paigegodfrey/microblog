@@ -2,8 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 function PostView({handleToggle, handleDeletePost, title, description, body}) {
-  const {id} = useParams();
-  
+  const { postId } = useParams();
+
   return (
     <div className="PostView">
       <div className="posts">
@@ -11,7 +11,7 @@ function PostView({handleToggle, handleDeletePost, title, description, body}) {
         <p>{description}</p>
         <p>{body}</p>
         <button onClick={handleToggle}>Edit</button>
-        <button onClick={()=>handleDeletePost(id)}>Delete</button>
+        <button onClick={() => handleDeletePost({postId})}>Delete</button>
       </div>
     </div>
   )

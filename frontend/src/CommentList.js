@@ -6,8 +6,8 @@ function CommentList({ handleDeleteComment, comments }) {
   const { postId } = useParams()
   const showComments = () => (
     comments.map(comment => (
-      <span>
-        <button onClick={() => handleDeleteComment({ postId, commentId: comment.id })}>X</button>
+      <span key={comment.id}>
+        <button onClick={() => handleDeleteComment({postId, commentId: comment.id })}>X</button>
         <span>{comment.text}</span>
       </span>
     ))

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { addPost, deletePost, addComment, deleteComment } from './actions';
 import PostView from "./PostView";
@@ -12,24 +12,28 @@ import NotFound from "./NotFound";
 function Post() {
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const [showEditForm, setShowEditForm] = useState(false)
+  const history = useHistory();
+
+  const [showEditForm, setShowEditForm] = useState(false);
+
   const post = useSelector(st => st.posts[postId]);
   if (!post) return <NotFound />;
 
   const handleToggle = () => {
-    setShowEditForm(showEditForm => !showEditForm)
+    setShowEditForm(showEditForm => !showEditForm);
   }
   const handleAddPost = (data) => {
     dispatch(addPost(data));
   }
   const handleDeletePost = (data) => {
     dispatch(deletePost(data));
+    history.push('/');
   }
   const handleAddComment = (data) => {
-    dispatch(addComment(data))
+    dispatch(addComment(data));
   }
   const handleDeleteComment = (data) => {
-    dispatch(deleteComment(data))
+    dispatch(deleteComment(data));
   }
 
   const showPost = () => (
@@ -47,7 +51,7 @@ function Post() {
     <div>
       {!showEditForm
         ? showPost()
-        : <BlogPostForm handleAddPost={handleAddPost} id={postId} {...post}/>
+        : <BlogPostForm handleAddPost={handleAddPost} postId={postId} {...post}/>
       }
     </div>
   )

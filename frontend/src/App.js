@@ -8,8 +8,8 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-          <Nav />
-          <Routes />
+        <Nav />
+        <Routes />
       </BrowserRouter>
     </div >
   );
