@@ -13,26 +13,29 @@ function Post() {
   const dispatch = useDispatch();
 
   const [showEditForm, setShowEditForm] = useState(false);
-  
+
   useEffect(() => {
-    dispatch(getPostFromAPI({postId}));
+    dispatch(getPostFromAPI({ postId }));
   }, [postId, dispatch]);
 
   const post = useSelector(st => st.posts[postId]);
   if (!post) return <NotFound />;
-  
+
   const handleToggle = () => {
     setShowEditForm(showEditForm => !showEditForm);
   }
-  
+
   const showPost = () => (
     <div>
       <PostView
         handleToggle={handleToggle}
         {...post} />
-      <CommentList />
-      <CommentForm />
-    </div>
+      <section className="Post-comments mb-4">
+        <h4>Comments</h4>
+        <CommentList />
+        <CommentForm />
+      </section>
+    </div >
   );
 
   return (

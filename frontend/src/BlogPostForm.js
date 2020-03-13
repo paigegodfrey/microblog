@@ -22,7 +22,7 @@ function BlogPostForm({ postId, title, description, body }) {
       [name]: value
     }));
   };
-  
+
   const handleAddPost = (data) => {
     dispatch(addPostToAPI(data));
   }
@@ -33,7 +33,7 @@ function BlogPostForm({ postId, title, description, body }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    postId ? handleEditPost({postId, data: formData}) 
+    postId ? handleEditPost({ postId, data: formData })
       : handleAddPost(formData);
     setFormData(INITIAL_STATE);
     history.push("/");
@@ -44,32 +44,39 @@ function BlogPostForm({ postId, title, description, body }) {
   }
 
   return (
-    <div className="BlogPostForm">
-      <form onSubmit={handleSubmit}>
-        <h2>New Post</h2>
-        <label htmlFor="title">Title:</label>
-        <input required
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-        <label htmlFor="description">Description:</label>
-        <input required
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
-        <label htmlFor="recipe">Body:</label>
-        <textarea required
-          name="body"
-          value={formData.body}
-          onChange={handleChange}
-        />
-        <button>Save</button>
+    <div>
+      <form className="mb-4" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="editform-title">Title:</label>
+          <input required
+            onChange={handleChange}
+            id="editform-title"
+            name="title"
+            className="form-control"
+            value={formData.title} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="editform-description">Description:</label>
+          <input required
+            onChange={handleChange}
+            id="editform-description"
+            name="description"
+            className="form-control"
+            value={formData.description} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="editform-body">Body:</label>
+          <textarea required
+            onChange={handleChange}
+            id="editform-body"
+            name="body"
+            className="form-control"
+            rows={10}
+            value={formData.body} />
+        </div>
+        <button className="btn btn-primary mr-2">Save</button>
       </form>
-      <button onClick={cancel}>Cancel</button>
+      <button onClick={cancel} className="btn btn-secondary">Cancel</button>
     </div>
   );
 }

@@ -7,17 +7,20 @@ function CommentList() {
   const { postId } = useParams()
   const comments = useSelector(st => st.posts[postId].comments)
   const dispatch = useDispatch();
-  
+
   const handleDeleteComment = (data) => {
     dispatch(deleteCommentFromAPI(data));
   }
 
   const showComments = () => (
     comments.map(comment => (
-      <div key={comment.id}>
-        <button onClick={() => handleDeleteComment({ postId, commentId: comment.id })}>X</button>
-        <span>{comment.text}</span>
-      </div>
+      <p key={comment.id}>
+        <i
+          className="fa fa-times text-danger mr-2"
+          onClick={() => handleDeleteComment({ postId, commentId: comment.id })}
+        />
+        {comment.text}
+      </p>
     ))
   );
 

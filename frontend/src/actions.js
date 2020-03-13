@@ -18,24 +18,10 @@ export function getPostsFromAPI() {
   };
 }
 
-function getPosts(data) {
-  return {
-    type: GET_POSTS,
-    payload: data
-  };
-}
-
 export function getPostFromAPI(params) {
   return async function(dispatch) {
     let res = await axios.get(`${BASE_URL}/api/posts/${params.postId}`);
     dispatch(getPost(res.data));
-  };
-}
-
-function getPost(data) {
-  return {
-    type: GET_POST,
-    payload: data
   };
 }
 
@@ -46,24 +32,10 @@ export function addPostToAPI(params) {
   };
 }
 
-function addPost(data) {
-  return {
-    type: ADD_POST,
-    payload: data
-  };
-}
-
 export function editPostFromAPI(params) {
   return async function(dispatch) {
     let res = await axios.put(`${BASE_URL}/api/posts/${params.postId}`, params.data);
     dispatch(editPost(res.data));
-  };
-}
-
-function editPost(data) {
-  return {
-    type: EDIT_POST,
-    payload: data
   };
 }
 
@@ -74,24 +46,10 @@ export function deletePostFromAPI(params) {
   };
 }
 
-function deletePost(data) {
-  return {
-    type: DELETE_POST,
-    payload: data
-  };
-}
-
 export function addCommentToAPI(params) {
   return async function(dispatch) {
     let res = await axios.post(`${BASE_URL}/api/posts/${params.postId}/comments`, params.data);
     dispatch(addComment({postId: params.postId, data: res.data}));
-  };
-}
-
-function addComment(data) {
-  return {
-    type: ADD_COMMENT,
-    payload: data
   };
 }
 
@@ -102,11 +60,51 @@ export function deleteCommentFromAPI(params) {
   };
 }
 
+function getPosts(data) {
+  return {
+    type: GET_POSTS,
+    payload: data
+  };
+}
+
+function getPost(data) {
+  return {
+    type: GET_POST,
+    payload: data
+  };
+}
+
+function addPost(data) {
+  return {
+    type: ADD_POST,
+    payload: data
+  };
+}
+
+function editPost(data) {
+  return {
+    type: EDIT_POST,
+    payload: data
+  };
+}
+
+function deletePost(data) {
+  return {
+    type: DELETE_POST,
+    payload: data
+  };
+}
+
+function addComment(data) {
+  return {
+    type: ADD_COMMENT,
+    payload: data
+  };
+}
+
 function deleteComment(data) {
   return {
     type: DELETE_COMMENT,
     payload: data
   };
 }
-
-

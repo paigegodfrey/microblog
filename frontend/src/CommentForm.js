@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {  addCommentToAPI } from './actions';
+import { addCommentToAPI } from './actions';
 
 function CommentForm() {
   const { postId } = useParams();
@@ -26,21 +26,23 @@ function CommentForm() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleAddComment({postId, data: formData });
+    handleAddComment({ postId, data: formData });
     setFormData(INITIAL_STATE);
   };
 
   return (
-    <div className="Comment">
+    <div>
       <form onSubmit={handleSubmit}>
-        <input required
-          type="text"
-          name="text"
-          placeholder="New Comment"
-          value={formData.text}
-          onChange={handleChange}
-        />
-        <button>Add</button>
+        <div className="form-group">
+          <input onChange={handleChange}
+            id="commentform-text"
+            name="text"
+            size="50"
+            placeholder="New Comment"
+            className="form-control"
+            value={formData.text} />
+        </div>
+        <button className="btn btn-primary">Add</button>
       </form>
     </div>
   )
