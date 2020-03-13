@@ -15,7 +15,7 @@ function rootReducer(state = INITIAL_STATE, action) {
   let stateDeepCopy = cloneDeep(state);
   let postId;
   let selectedPost;
-  let comment;
+  let commentId;
 
   switch (action.type) {
     case GET_POSTS:
@@ -52,24 +52,23 @@ function rootReducer(state = INITIAL_STATE, action) {
       return stateDeepCopy;
 
     case ADD_COMMENT:
-      // where payload is { id, text }
-      let { id, text } = action.payload;
+      // where payload is { postId, data: { id, text } }
+      ({ postId } = action.payload);
+      let commentData = action.payload.data;
       selectedPost = stateDeepCopy.posts[postId];
-      selectedPost.comments.push(comment);
+      selectedPost.comments.push(commentData);
       return stateDeepCopy;
 
     case DELETE_COMMENT:
+      // where payload is { postId, commentId }
+      ({ postId, commentId } = action.payload);
+      console.log(action.payload);
 
-      let { commentId } = action.payload;
-      ({ postId } = action.payload);
       selectedPost = stateDeepCopy.posts[postId];
-
       let updatedComments = selectedPost.comments
         .filter(comment => comment.id !== commentId);
-
       selectedPost.comments = updatedComments;
-
-      return { ...stateDeepCopy };
+      return stateDeepCopy;
 
     default:
       return state;

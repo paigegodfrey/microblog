@@ -5,8 +5,8 @@ import {
   getPostFromAPI, 
   editPostFromAPI, 
   deletePostFromAPI, 
-  addCommentToAPI, 
-  deleteComment } 
+  addCommentToAPI,
+  deleteCommentFromAPI} 
 from './actions';
 import PostView from "./PostView";
 import CommentForm from "./CommentForm";
@@ -19,7 +19,7 @@ function Post() {
   const dispatch = useDispatch();
 
   const [showEditForm, setShowEditForm] = useState(false);
-
+  
   useEffect(() => {
     dispatch(getPostFromAPI({postId}));
   }, [postId, dispatch]);
@@ -40,7 +40,7 @@ function Post() {
     dispatch(addCommentToAPI(data));
   }
   const handleDeleteComment = (data) => {
-    dispatch(deleteComment(data));
+    dispatch(deleteCommentFromAPI(data));
   }
 
   const showPost = () => (

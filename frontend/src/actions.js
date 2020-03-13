@@ -95,7 +95,15 @@ function addComment(data) {
   };
 }
 
-export function deleteComment(data) {
+export function deleteCommentFromAPI(params) {
+  return async function(dispatch) {
+    await axios.delete(`${BASE_URL}/api/posts/${params.postId}/comments/${params.commentId}`);
+    dispatch(deleteComment({postId: params.postId, commentId: params.commentId}));
+  };
+}
+
+
+function deleteComment(data) {
   return {
     type: DELETE_COMMENT,
     payload: data
