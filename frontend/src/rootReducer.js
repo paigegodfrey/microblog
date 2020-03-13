@@ -62,8 +62,6 @@ function rootReducer(state = INITIAL_STATE, action) {
     case DELETE_COMMENT:
       // where payload is { postId, commentId }
       ({ postId, commentId } = action.payload);
-      console.log(action.payload);
-
       selectedPost = stateDeepCopy.posts[postId];
       let updatedComments = selectedPost.comments
         .filter(comment => comment.id !== commentId);

@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { 
-  getPostFromAPI, 
-  editPostFromAPI, 
-  deletePostFromAPI, 
-  addCommentToAPI,
-  deleteCommentFromAPI} 
-from './actions';
+import { getPostFromAPI } from './actions';
 import PostView from "./PostView";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -30,27 +24,14 @@ function Post() {
   const handleToggle = () => {
     setShowEditForm(showEditForm => !showEditForm);
   }
-  const handleEditPost = (data) => {
-    dispatch(editPostFromAPI(data));
-  }
-  const handleDeletePost = (data) => {
-    dispatch(deletePostFromAPI(data));
-  }
-  const handleAddComment = (data) => {
-    dispatch(addCommentToAPI(data));
-  }
-  const handleDeleteComment = (data) => {
-    dispatch(deleteCommentFromAPI(data));
-  }
-
+  
   const showPost = () => (
     <div>
       <PostView
         handleToggle={handleToggle}
-        handleDeletePost={handleDeletePost}
         {...post} />
-      <CommentList handleDeleteComment={handleDeleteComment} />
-      <CommentForm handleAddComment={handleAddComment} />
+      <CommentList />
+      <CommentForm />
     </div>
   );
 
@@ -58,11 +39,7 @@ function Post() {
     <div>
       {!showEditForm
         ? showPost()
-        : <BlogPostForm
-          handleEditPost={handleEditPost}
-          postId={postId}
-          {...post}
-        />
+        : <BlogPostForm postId={postId} {...post} />
       }
     </div>
   )

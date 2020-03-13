@@ -102,7 +102,6 @@ export function deleteCommentFromAPI(params) {
   };
 }
 
-
 function deleteComment(data) {
   return {
     type: DELETE_COMMENT,

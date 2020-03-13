@@ -1,11 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { deleteCommentFromAPI } from './actions';
 
-function CommentList({ handleDeleteComment }) {
+function CommentList() {
   const { postId } = useParams()
   const comments = useSelector(st => st.posts[postId].comments)
+  const dispatch = useDispatch();
   
+  const handleDeleteComment = (data) => {
+    dispatch(deleteCommentFromAPI(data));
+  }
+
   const showComments = () => (
     comments.map(comment => (
       <div key={comment.id}>

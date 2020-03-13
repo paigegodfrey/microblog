@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addPostToAPI, editPostFromAPI } from "./actions"
 
-function BlogPostForm({ handleAddPost, handleEditPost, postId, title, description, body }) {
+function BlogPostForm({ postId, title, description, body }) {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const INITIAL_STATE = {
@@ -20,10 +23,18 @@ function BlogPostForm({ handleAddPost, handleEditPost, postId, title, descriptio
     }));
   };
   
+  const handleAddPost = (data) => {
+    dispatch(addPostToAPI(data));
+  }
+
+  const handleEditPost = (data) => {
+    dispatch(editPostFromAPI(data));
+  }
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    postId ? handleEditPost({postId, data: formData}) :
-      handleAddPost(formData);
+    postId ? handleEditPost({postId, data: formData}) 
+      : handleAddPost(formData);
     setFormData(INITIAL_STATE);
     history.push("/");
   };

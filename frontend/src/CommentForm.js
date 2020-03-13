@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import {  addCommentToAPI } from './actions';
 
-function CommentForm({handleAddComment}) {
+function CommentForm() {
   const { postId } = useParams();
+  const dispatch = useDispatch();
 
   const INITIAL_STATE = {
     text: ""
@@ -16,6 +19,10 @@ function CommentForm({handleAddComment}) {
       [name]: value
     }));
   };
+
+  const handleAddComment = (data) => {
+    dispatch(addCommentToAPI(data));
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
