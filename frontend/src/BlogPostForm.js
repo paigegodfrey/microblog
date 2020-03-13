@@ -22,7 +22,7 @@ function BlogPostForm({ handleAddPost, handleEditPost, postId, title, descriptio
   
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    postId ? handleEditPost({id: postId, data: formData}) :
+    postId ? handleEditPost({postId, data: formData}) :
       handleAddPost(formData);
     setFormData(INITIAL_STATE);
     history.push("/");

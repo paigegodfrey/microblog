@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { 
   getPostFromAPI, 
   editPostFromAPI, 
@@ -17,7 +17,6 @@ import NotFound from "./NotFound";
 function Post() {
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -36,7 +35,6 @@ function Post() {
   }
   const handleDeletePost = (data) => {
     dispatch(deletePostFromAPI(data));
-    history.push('/');
   }
   const handleAddComment = (data) => {
     dispatch(addCommentToAPI(data));

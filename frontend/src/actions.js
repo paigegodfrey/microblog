@@ -55,7 +55,7 @@ function addPost(data) {
 
 export function editPostFromAPI(params) {
   return async function(dispatch) {
-    let res = await axios.put(`${BASE_URL}/api/posts/${params.id}`, params.data);
+    let res = await axios.put(`${BASE_URL}/api/posts/${params.postId}`, params.data);
     dispatch(editPost(res.data));
   };
 }
