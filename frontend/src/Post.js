@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-
-import { getPostFromAPI, editPostWithAPI, addComment, deleteComment, deletePostWithAPI } from './actions';
+import { 
+  getPostFromAPI, 
+  editPostFromAPI, 
+  deletePostFromAPI, 
+  addCommentToAPI, 
+  deleteComment } 
+from './actions';
 import PostView from "./PostView";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -18,25 +23,23 @@ function Post() {
 
   useEffect(() => {
     dispatch(getPostFromAPI({postId}));
-  }, [dispatch]);
+  }, [postId, dispatch]);
 
   const post = useSelector(st => st.posts[postId]);
-  const state = useSelector(st => st)
-  console.log(state);
   if (!post) return <NotFound />;
-
+  
   const handleToggle = () => {
     setShowEditForm(showEditForm => !showEditForm);
   }
   const handleEditPost = (data) => {
-    dispatch(editPostWithAPI(data));
+    dispatch(editPostFromAPI(data));
   }
   const handleDeletePost = (data) => {
-    dispatch(deletePostWithAPI(data));
+    dispatch(deletePostFromAPI(data));
     history.push('/');
   }
   const handleAddComment = (data) => {
-    dispatch(addComment(data));
+    dispatch(addCommentToAPI(data));
   }
   const handleDeleteComment = (data) => {
     dispatch(deleteComment(data));
@@ -58,7 +61,7 @@ function Post() {
       {!showEditForm
         ? showPost()
         : <BlogPostForm
-          handlePost={handleEditPost}
+          handleEditPost={handleEditPost}
           postId={postId}
           {...post}
         />

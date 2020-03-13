@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
 
 function CommentForm({handleAddComment}) {
-
   const { postId } = useParams();
 
   const INITIAL_STATE = {
     text: ""
   }
-
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const handleChange = evt => {
@@ -22,7 +19,7 @@ function CommentForm({handleAddComment}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleAddComment({postId, comment:{...formData, id:uuid()}});
+    handleAddComment({postId, data: formData });
     setFormData(INITIAL_STATE);
   };
 

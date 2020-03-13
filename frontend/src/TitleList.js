@@ -5,22 +5,19 @@ import { getPostsFromAPI } from "./actions"
 
 function TitleList() {
 
-  const titlesObj = useSelector(st => st.titles);
-  const dispatch = useDispatch();
+  const state = useSelector(st => st);
+  console.log(state);
 
-  let titles = [];
+  const titles = useSelector(st => st.titles);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPostsFromAPI());
   }, [dispatch]);
 
-  for (let [key, value] of Object.entries(titlesObj)) {
-    titles.push({ id: key, post: value })
-  }
-
   return (
     <div>
-      {titles.map(t => <PostCard {...t.post} key={t.id} id={t.id} />)}
+      {titles.map(title => <PostCard {...title} key={title.id} />)}
     </div>
   )
 }

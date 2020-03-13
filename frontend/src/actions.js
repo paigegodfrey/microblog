@@ -1,4 +1,12 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, GET_POSTS, GET_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { 
+  GET_POSTS, 
+  GET_POST,
+  ADD_POST,
+  EDIT_POST,
+  DELETE_POST, 
+  ADD_COMMENT, 
+  DELETE_COMMENT } 
+from "./actionTypes";
 import axios from "axios";
 
 const BASE_URL = 'http://localhost:5000';
@@ -17,9 +25,9 @@ function getPosts(data) {
   };
 }
 
-export function getPostFromAPI(data) {
+export function getPostFromAPI(params) {
   return async function(dispatch) {
-    let res = await axios.get(`${BASE_URL}/api/posts/${data.postId}`);
+    let res = await axios.get(`${BASE_URL}/api/posts/${params.postId}`);
     dispatch(getPost(res.data));
   };
 }
@@ -31,7 +39,7 @@ function getPost(data) {
   };
 }
 
-export function addPostWithAPI(params) {
+export function addPostToAPI(params) {
   return async function(dispatch) {
     let res = await axios.post(`${BASE_URL}/api/posts`, params);
     dispatch(addPost(res.data));
@@ -45,14 +53,21 @@ function addPost(data) {
   };
 }
 
-export function editPostWithAPI(params) {
+export function editPostFromAPI(params) {
   return async function(dispatch) {
     let res = await axios.put(`${BASE_URL}/api/posts/${params.id}`, params.data);
-    dispatch(addPost(res.data));
+    dispatch(editPost(res.data));
   };
 }
 
-export function deletePostWithAPI(params) {
+function editPost(data) {
+  return {
+    type: EDIT_POST,
+    payload: data
+  };
+}
+
+export function deletePostFromAPI(params) {
   return async function(dispatch) {
     await axios.delete(`${BASE_URL}/api/posts/${params.postId}`);
     dispatch(deletePost({postId: params.postId}));
@@ -66,9 +81,14 @@ function deletePost(data) {
   };
 }
 
+export function addCommentToAPI(params) {
+  return async function(dispatch) {
+    let res = await axios.post(`${BASE_URL}/api/posts/${params.postId}/comments`, params.data);
+    dispatch(addComment({postId: params.postId, data: res.data}));
+  };
+}
 
-
-export function addComment(data) {
+function addComment(data) {
   return {
     type: ADD_COMMENT,
     payload: data

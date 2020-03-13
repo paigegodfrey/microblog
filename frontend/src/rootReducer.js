@@ -1,7 +1,14 @@
-import { ADD_POST, GET_POST, GET_POSTS, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { 
+  GET_POSTS, 
+  GET_POST, 
+  ADD_POST, 
+  EDIT_POST,
+  DELETE_POST, 
+  ADD_COMMENT, 
+  DELETE_COMMENT } from "./actionTypes";
 import cloneDeep from 'lodash/cloneDeep';
 
-const INITIAL_STATE = { posts: {}, titles: {} };
+const INITIAL_STATE = { posts: {}, titles: [] };
 
 function rootReducer(state = INITIAL_STATE, action) {
 
@@ -12,46 +19,47 @@ function rootReducer(state = INITIAL_STATE, action) {
 
   switch (action.type) {
     case GET_POSTS:
-      // where payload is [ { id, title, description, votes }, {...} }]
-      let titles = {};
+      // where payload is [ { id, title, description, votes }, {...} } ] 
       let allTitlesData = action.payload;
-      allTitlesData.forEach(title => {
-        titles[title.id]=title;
-        delete titles[title.id].id;
-      });
-      stateDeepCopy.titles = titles;
+      stateDeepCopy.titles = allTitlesData;
       return stateDeepCopy;
 
     case GET_POST:
-      // where payload is  { id, title, description, body, votes, comments: [{id,text}...] }
+      // where payload is { id, title, description, body, votes, 
+      //                    comments: [ { id, text }, ...] }
       selectedPost = action.payload;
-      stateDeepCopy.posts[selectedPost.id] = selectedPost
-      delete stateDeepCopy.posts[selectedPost.id].id
+      stateDeepCopy.posts[selectedPost.id] = selectedPost;
+      delete stateDeepCopy.posts[selectedPost.id].id;
       return stateDeepCopy;
 
     case ADD_POST:
-      // where payload is {id: { title, description, body } }
+      // where payload is { id, title, description, body, votes }
       let newPostData = action.payload;
-      stateDeepCopy.titles[newPostData.id] = newPostData
-      delete stateDeepCopy.titles[newPostData.id].id
+      stateDeepCopy.titles = [...stateDeepCopy.titles, newPostData];
+      return stateDeepCopy;
+
+    case EDIT_POST:
+      // where payload is { id, title, description, body, votes }
+      let editPostData = action.payload;
+      let idx = stateDeepCopy.titles.findIndex(title => title.id === editPostData.id);
+      stateDeepCopy.titles[idx] = editPostData;
       return stateDeepCopy;
 
     case DELETE_POST:
-      // where payload is {postId: #}
+      // where payload is { postId }
       ({ postId } = action.payload);
-      delete stateDeepCopy.titles[postId];
+      delete stateDeepCopy.posts[postId];
       return stateDeepCopy;
 
     case ADD_COMMENT:
-      // where payload is {postId: #, comment: {}}
-      ({ postId, comment } = action.payload);
+      // where payload is { id, text }
+      let { id, text } = action.payload;
       selectedPost = stateDeepCopy.posts[postId];
       selectedPost.comments.push(comment);
-
       return stateDeepCopy;
 
     case DELETE_COMMENT:
-      
+
       let { commentId } = action.payload;
       ({ postId } = action.payload);
       selectedPost = stateDeepCopy.posts[postId];

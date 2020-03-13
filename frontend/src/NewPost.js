@@ -1,19 +1,18 @@
 import React from "react";
 import BlogPostForm from "./BlogPostForm";
 import { useDispatch } from 'react-redux';
-import { addPostWithAPI } from "./actions"
+import { addPostToAPI } from "./actions"
 
 function NewPost() {
   const dispatch = useDispatch();
 
-  
   const handleAddPost = (data) => {
-    dispatch(addPostWithAPI(data));
+    dispatch(addPostToAPI(data));
   }
 
   return (
     <div>
-      <BlogPostForm handlePost={handleAddPost} />
+      <BlogPostForm handleAddPost={handleAddPost} />
     </div>
   )
 }
