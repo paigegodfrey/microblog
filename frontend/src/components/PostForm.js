@@ -3,11 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { sendPostToAPI, editPostInAPI } from "./actions"
 
-/** Show post form.
- *
- * Can be used for editing/adding posts.
- */
-
 const PostForm = ({ postId, title, description, body }) => {
   const dispatch = useDispatch();
   const history = useHistory();

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { sendCommentToAPI } from './actions';
 
-function CommentForm() {
+const CommentForm = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
 

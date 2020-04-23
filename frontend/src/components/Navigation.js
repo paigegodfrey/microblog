@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
-
   return (
     <div className="Navigation jumbotron mt-2">
       <h1 className="App-title display-4">Microblog</h1>

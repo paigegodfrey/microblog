@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { deleteCommentFromAPI } from './actions';
 
-function CommentList() {
+const CommentList = () => {
   const { postId } = useParams()
   const comments = useSelector(st => st.posts[postId].comments)
   const dispatch = useDispatch();
