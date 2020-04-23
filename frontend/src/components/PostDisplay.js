@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePostFromAPI } from './actions';
 
-const PostDisplay = ({ handleToggle, title, description, body }) => {
+const PostDisplay = ({ toggleEdit, title, description, body }) => {
   const { postId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -23,7 +23,7 @@ const PostDisplay = ({ handleToggle, title, description, body }) => {
       <div className="PostDisplay-right">
         <div className="PostDisplay-edit-area">
           <i className="fas fa-edit text-primary"
-            onClick={handleToggle} />
+            onClick={toggleEdit} />
           <i className="fas fa-times text-danger"
             onClick={() => handleDeletePost({ postId })} />
         </div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getPostFromAPI } from './actions';
-import PostDisplay from "./PostDisplay";
-import CommentForm from "./CommentForm";
-import CommentList from "./CommentList";
+import { getPostFromAPI } from "../actions/posts";
 import PostForm from "./PostForm";
+import PostDisplay from "./PostDisplay";
+import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 import NotFound from "./NotFound";
+import "./Post.css";
 
 const Post = () => {
   const { postId } = useParams();
@@ -21,14 +22,14 @@ const Post = () => {
   const post = useSelector(st => st.posts[postId]);
   if (!post) return <NotFound />;
 
-  const handleToggle = () => {
+  const toggleEdit = () => {
     setShowEditForm(showEditForm => !showEditForm);
   }
 
   const showPost = () => (
     <div>
       <PostDisplay
-        handleToggle={handleToggle}
+        toggleEdit={toggleEdit}
         {...post} />
       <section className="Post-comments mb-4">
         <h4>Comments</h4>
