@@ -1,14 +1,15 @@
 import React from "react";
-import Nav from "./Nav";
+import Navigation from "./Navigation";
 import Routes from "./Routes";
 import { BrowserRouter } from 'react-router-dom';
+import './App.css';
 
-function App() {
+const App = () => {
 
   return (
-    <div>
+    <div className="App">
       <BrowserRouter>
-        <Nav />
+        <Navigation />
         <Routes />
       </BrowserRouter>
     </div >

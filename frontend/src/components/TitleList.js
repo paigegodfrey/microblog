@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PostCard from "./PostCard";
 import { getPostsFromAPI } from "./actions"
 
-function TitleList() {
-
+const TitleList = () => {
   const state = useSelector(st => st);
   console.log(state);
 

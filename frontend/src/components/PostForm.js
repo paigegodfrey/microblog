@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addPostToAPI, editPostFromAPI } from "./actions"
+import { sendPostToAPI, editPostInAPI } from "./actions"
 
-function BlogPostForm({ postId, title, description, body }) {
+/** Show post form.
+ *
+ * Can be used for editing/adding posts.
+ */
+
+const PostForm = ({ postId, title, description, body }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -24,11 +29,11 @@ function BlogPostForm({ postId, title, description, body }) {
   };
 
   const handleAddPost = (data) => {
-    dispatch(addPostToAPI(data));
+    dispatch(sendPostToAPI(data));
   }
 
   const handleEditPost = (data) => {
-    dispatch(editPostFromAPI(data));
+    dispatch(editPostInAPI(data));
   }
 
   const handleSubmit = (evt) => {
@@ -81,4 +86,4 @@ function BlogPostForm({ postId, title, description, body }) {
   );
 }
 
-export default BlogPostForm;
+export default PostForm;

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePostFromAPI } from './actions';
 
-function PostView({ handleToggle, title, description, body }) {
+const PostDisplay = ({ handleToggle, title, description, body }) => {
   const { postId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,4 +40,4 @@ function PostView({ handleToggle, title, description, body }) {
   )
 }
 
-export default PostView;
+export default PostDisplay;

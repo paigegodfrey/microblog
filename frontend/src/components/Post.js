@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPostFromAPI } from './actions';
-import PostView from "./PostView";
+import PostDisplay from "./PostDisplay";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-import BlogPostForm from "./BlogPostForm";
+import PostForm from "./PostForm";
 import NotFound from "./NotFound";
 
-function Post() {
+const Post = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ function Post() {
 
   const showPost = () => (
     <div>
-      <PostView
+      <PostDisplay
         handleToggle={handleToggle}
         {...post} />
       <section className="Post-comments mb-4">
@@ -42,7 +42,7 @@ function Post() {
     <div>
       {!showEditForm
         ? showPost()
-        : <BlogPostForm postId={postId} {...post} />
+        : <PostForm postId={postId} {...post} />
       }
     </div>
   )
