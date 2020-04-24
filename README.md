@@ -4,6 +4,8 @@ Microblog is a simple app that allows users to create/modify blog posts and add/
 
 The frontend is built with React and styled with Bootstrap, and the backend runs on Node/Express and uses a PostgreSQL database.
 
+Live demo: https://microblog-react-app.herokuapp.com/
+
 ## Getting Started
 To clone the repository run the following command:
 
