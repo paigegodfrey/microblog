@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 
-/** Comment form
- *
- * Could be used for adding/editing: just shows form and tracks input.
- *
- */
-
-function CommentForm({submitCommentForm}) {
+const CommentForm = ({submitCommentForm}) => {
   const [text, setText] = useState();
 
-  function handleSubmit(evt) {
+  const handleSubmit = evt => {
     evt.preventDefault();
     submitCommentForm(text);
     setText("");
   }
 
-  function handleChange(evt) {
+  const handleChange = evt => {
     setText(evt.target.value);
   }
 
@@ -32,9 +26,7 @@ function CommentForm({submitCommentForm}) {
                 value={text} />
         </div>
         <button className="btn btn-primary">Add</button>
-
       </form>
-
     </div>
   );
 }

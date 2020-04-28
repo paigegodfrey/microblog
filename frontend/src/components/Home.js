@@ -1,7 +1,7 @@
 import React from 'react';
 import TitleList from "./TitleList";
 
-function Home() {
+const Home = () => {
   return (
     <main>
       <p>

@@ -10,7 +10,7 @@ const Routes = () => {
     <Switch>
       <Route exact path="/"><Home /></Route>
       <Route exact path="/new"><NewPost /></Route>
-      <Route exact path="/:postId"><Post /></Route>
+      <Route path="/:postId"><Post /></Route>
       <Route><NotFound /></Route>
     </Switch>
   );

@@ -1,15 +1,8 @@
 import React from 'react';
 
-/** CommentList: shows list of comments passed down as props.
- *
- * Comments can be deleted by clicking next to them; this is handled by
- * the parent.
- *
- */
+const Comment = ({deleteComment, text, id}) => {
 
-function Comment({deleteComment, text, id}) {
-
-  function handleDelete(){
+  const handleDelete = () => {
     deleteComment(id);
   }
 
@@ -22,7 +15,6 @@ function Comment({deleteComment, text, id}) {
             onClick={handleDelete}
           />
         )}
-
         {text}
       </p>
     </div>

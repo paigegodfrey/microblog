@@ -15,102 +15,81 @@ import CommentList from "../components/CommentList";
 import PostDisplay from "../components/PostDisplay";
 import CommentForm from "../components/CommentForm";
 
-/** Post:
- *
- * - get post data from API, if not present
- * - allows post to be edited (toggleEdit is local state for this)
- * - handles edit form submission
- * - handles add-comment form submission
- * - handles comment-deletion
- * - handles post-deletion
- */
+const Post = () => {
 
-function Post(props) {
-
-  const [isEditing, setIsEditing] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const postId = Number(useParams().postId);
-  const history = useHistory();
   const post = useSelector(st => st.posts[postId]);
+
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  /** If we don't have the post, request it from API. */
-
-  useEffect(function() {
-    async function getPost() {
+  useEffect(() => {
+    const getPost = async () => {
       dispatch(getPostFromAPI(postId));
     }
-    if (!post) {
-      getPost();
-    }
-  }, [postId, post, dispatch]);
+    getPost();
+  }, [postId, dispatch]);
 
   /** Toggle editing on/off */
 
-  function toggleEdit() {
-    setIsEditing(edit => !edit);
+  const toggleEdit = () => {
+    setShowEditForm(edit => !edit);
   }
 
   /** Handle post editing: adds to backend. */
 
-  function edit({ title, description, body }) {
+  const edit = ({ title, description, body }) => {
     dispatch(updatePostInAPI(
       postId,
       title,
       description,
       body
     ));
-
     toggleEdit();
   }
 
   /** Handle post deletion: deletes from backend. */
 
-  function deletePost() {
+  const deletePost = () => {
     dispatch(removePostFromAPI(postId));
     history.push("/");
   }
 
   /** Handle voting in backend. */
 
-  function vote(direction) {
+  const vote = direction => {
     dispatch(sendVoteToAPI(postId, direction));
   }
 
   /** Handle adding a comment: adds to backend. */
 
-  function addComment(text) {
+  const addComment = text => {
     dispatch(sendCommentToAPI(postId, text));
   }
 
   /** Handle deleting a comment in backend. */
 
-  function deleteComment(commentId) {
+  const deleteComment = commentId => {
     dispatch(removeCommentFromAPI(postId, commentId));
   }
-
-  /** Render:
-   *
-   * - if not post yet, a loading message
-   * - if editing, the edit form & comments
-   * - if not, the display & comments
-   */
 
   if (!post) return <p>Loading</p>;
 
   return (
     <div className="Post">
 
-      {isEditing
-        ? <PostForm post={post} save={edit} cancel={toggleEdit} />
+      {showEditForm
+        ? <PostForm post={post} save={edit} />
         : <PostDisplay post={post}
-                        toggleEdit={toggleEdit}
-                        deletePost={deletePost}
-                        doVote={vote} />}
+          toggleEdit={toggleEdit}
+          deletePost={deletePost}
+          doVote={vote} />}
 
       <section className="Post-comments mb-4">
         <h4>Comments</h4>
         <CommentList comments={post.comments}
-                      deleteComment={deleteComment} />
+          deleteComment={deleteComment} />
         <CommentForm submitCommentForm={addComment} />
       </section>
 
