@@ -1,16 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./Navigation.css";
 
 const Navigation = () => {
   return (
-    <div className="Navigation jumbotron mt-2">
-      <h1 className="App-title display-4">Microblog</h1>
-      <p className="lead">Start blogging today!</p>
+    <header className="Navigation jumbotron mt-2">
+      <h1 className="display-4">Microblog</h1>
+      <p className="lead">Get in the Rithm of blogging!</p>
       <nav>
         <NavLink exact to="/">Blog</NavLink>
         <NavLink exact to="/new">Add a new post</NavLink>
       </nav>
-    </div>
+    </header>
   );
 }
 
