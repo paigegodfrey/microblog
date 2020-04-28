@@ -1,52 +1,121 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getPostFromAPI } from "../actions/posts";
-import PostForm from "./PostForm";
-import PostDisplay from "./PostDisplay";
-import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
-import NotFound from "./NotFound";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+import {
+  getPostFromAPI,
+  updatePostInAPI,
+  sendVoteToAPI,
+  sendCommentToAPI,
+  removeCommentFromAPI,
+  removePostFromAPI
+} from "../actions/posts";
+import PostForm from "../components/PostForm";
+import CommentList from "../components/CommentList";
+import PostDisplay from "../components/PostDisplay";
+import CommentForm from "../components/CommentForm";
 
-const Post = () => {
-  const { postId } = useParams();
+/** Post:
+ *
+ * - get post data from API, if not present
+ * - allows post to be edited (toggleEdit is local state for this)
+ * - handles edit form submission
+ * - handles add-comment form submission
+ * - handles comment-deletion
+ * - handles post-deletion
+ */
+
+function Post(props) {
+
+  const [isEditing, setIsEditing] = useState(false);
+  const postId = Number(useParams().postId);
+  const history = useHistory();
+  const post = useSelector(st => st.posts[postId]);
   const dispatch = useDispatch();
 
-  const [showEditForm, setShowEditForm] = useState(false);
+  /** If we don't have the post, request it from API. */
 
-  useEffect(() => {
-    dispatch(getPostFromAPI({ postId }));
-  }, [postId, dispatch]);
+  useEffect(function() {
+    async function getPost() {
+      dispatch(getPostFromAPI(postId));
+    }
+    if (!post) {
+      getPost();
+    }
+  }, [postId, post, dispatch]);
 
-  const post = useSelector(st => st.posts[postId]);
-  if (!post) return <NotFound />;
+  /** Toggle editing on/off */
 
-  const toggleEdit = () => {
-    setShowEditForm(showEditForm => !showEditForm);
+  function toggleEdit() {
+    setIsEditing(edit => !edit);
   }
 
-  const showPost = () => (
-    <div>
-      <PostDisplay
-        toggleEdit={toggleEdit}
-        {...post} />
-      <section className="Post-comments mb-4">
-        <h4>Comments</h4>
-        <CommentList />
-        <CommentForm />
-      </section>
-    </div >
-  );
+  /** Handle post editing: adds to backend. */
+
+  function edit({ title, description, body }) {
+    dispatch(updatePostInAPI(
+      postId,
+      title,
+      description,
+      body
+    ));
+
+    toggleEdit();
+  }
+
+  /** Handle post deletion: deletes from backend. */
+
+  function deletePost() {
+    dispatch(removePostFromAPI(postId));
+    history.push("/");
+  }
+
+  /** Handle voting in backend. */
+
+  function vote(direction) {
+    dispatch(sendVoteToAPI(postId, direction));
+  }
+
+  /** Handle adding a comment: adds to backend. */
+
+  function addComment(text) {
+    dispatch(sendCommentToAPI(postId, text));
+  }
+
+  /** Handle deleting a comment in backend. */
+
+  function deleteComment(commentId) {
+    dispatch(removeCommentFromAPI(postId, commentId));
+  }
+
+  /** Render:
+   *
+   * - if not post yet, a loading message
+   * - if editing, the edit form & comments
+   * - if not, the display & comments
+   */
+
+  if (!post) return <p>Loading</p>;
 
   return (
-    <div>
-      {!showEditForm
-        ? showPost()
-        : <PostForm postId={postId} {...post} />
-      }
+    <div className="Post">
+
+      {isEditing
+        ? <PostForm post={post} save={edit} cancel={toggleEdit} />
+        : <PostDisplay post={post}
+                        toggleEdit={toggleEdit}
+                        deletePost={deletePost}
+                        doVote={vote} />}
+
+      <section className="Post-comments mb-4">
+        <h4>Comments</h4>
+        <CommentList comments={post.comments}
+                      deleteComment={deleteComment} />
+        <CommentForm submitCommentForm={addComment} />
+      </section>
+
     </div>
-  )
+  );
 }
 
 export default Post;

@@ -1,19 +1,45 @@
 import React from "react";
-import Navigation from "./Navigation";
-import Routes from "./Routes";
-import { BrowserRouter } from 'react-router-dom';
+import NewPost from "./NewPost";
+import { Route, NavLink, Switch } from "react-router-dom";
+import Post from "./Post";
 import './App.css';
 
-const App = () => {
+import Home from "./Home";
+
+/** Overall blog application:
+ *
+ * - shows header, nav links, and contains routes to:
+ *   - new form
+ *   - homepage
+ *   - individual posts
+ */
+
+function App() {
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navigation />
-        <Routes />
-      </BrowserRouter>
-    </div >
+    <div className="App container">
+      <header className="App-header jumbotron mt-2">
+        <h1 className="App-title display-4">Microblog</h1>
+        <p className="lead">Get in the Rithm of blogging!</p>
+        <nav>
+          <NavLink exact to="/">Blog</NavLink>
+          <NavLink exact to="/new">Add a new post</NavLink>
+        </nav>
+      </header>
+
+      <Switch>
+        <Route exact path="/new">
+          <NewPost />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/:postId">
+          <Post />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
 export default App;
-

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import TitleList from "./TitleList";
 
-const Home = () => {
+function Home() {
   return (
     <main>
       <p>
@@ -10,7 +10,7 @@ const Home = () => {
       </p>
       <TitleList />
     </main>
-  )
+  );
 }
 
 export default Home;

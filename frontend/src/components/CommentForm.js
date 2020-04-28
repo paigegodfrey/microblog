@@ -1,51 +1,42 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { sendCommentToAPI } from './actions';
+import React, { useState } from 'react';
 
-const CommentForm = () => {
-  const { postId } = useParams();
-  const dispatch = useDispatch();
+/** Comment form
+ *
+ * Could be used for adding/editing: just shows form and tracks input.
+ *
+ */
 
-  const INITIAL_STATE = {
-    text: ""
-  }
-  const [formData, setFormData] = useState(INITIAL_STATE);
+function CommentForm({submitCommentForm}) {
+  const [text, setText] = useState();
 
-  const handleChange = evt => {
-    const { name, value } = evt.target;
-    setFormData(fData => ({
-      ...fData,
-      [name]: value
-    }));
-  };
-
-  const handleAddComment = (data) => {
-    dispatch(sendCommentToAPI(data));
-  }
-
-  const handleSubmit = (evt) => {
+  function handleSubmit(evt) {
     evt.preventDefault();
-    handleAddComment({ postId, data: formData });
-    setFormData(INITIAL_STATE);
-  };
+    submitCommentForm(text);
+    setText("");
+  }
+
+  function handleChange(evt) {
+    setText(evt.target.value);
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input onChange={handleChange}
-            id="commentform-text"
-            name="text"
-            size="50"
-            placeholder="New Comment"
-            className="form-control"
-            value={formData.text} />
+        <input onChange={handleChange}
+                id="commentform-text"
+                name="text"
+                size="50"
+                placeholder="New Comment"
+                className="form-control"
+                value={text} />
         </div>
         <button className="btn btn-primary">Add</button>
+
       </form>
+
     </div>
-  )
+  );
 }
 
 export default CommentForm;

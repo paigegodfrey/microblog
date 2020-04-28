@@ -1,89 +1,89 @@
 import axios from "axios";
 import {
-  FETCH_POST,
+  REMOVE_POST,
   ADD_POST,
   UPDATE_POST,
-  REMOVE_POST,
   VOTE,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  FETCH_POST
 } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/posts";
 
 
-export const getPostFromAPI = id => {
-  return async (dispatch) => {
-    let res = await axios.get(`${API_URL}/${id}`);
-    dispatch(getPost(res.data));
+export function getPostFromAPI(id) {
+  return async function (dispatch) {
+    const response = await axios.get(`${API_URL}/${id}`);
+    return dispatch(getPost(response.data));
   };
 }
 
-const getPost = post => {
+function getPost(post) {
   return {
     type: FETCH_POST,
-    post
+    post,
   };
 }
 
-export const sendPostToAPI = (title, description, body) => {
-  return async (dispatch) => {
-    let res = await axios.post(`${API_URL}`, {
+export function sendPostToAPI(title, description, body) {
+  return async function (dispatch) {
+    const response = await axios.post(`${API_URL}`, {
       title,
       description,
       body
     });
-    dispatch(addPost(res.data));
+    return dispatch(addPost(response.data));
   };
 }
 
-const addPost = post => {
+function addPost(post) {
   return {
     type: ADD_POST,
     post
   };
 }
 
-export const updatePostInAPI = (id, title, description, body) => {
-  return async (dispatch) => {
-    let res = await axios.put(`${API_URL}/${id}`, {
-      title,
-      description,
-      body
-    });
-    dispatch(updatePost(res.data));
-  };
-}
-
-const updatePost = post => {
-  return {
-    type: UPDATE_POST,
-    post
-  };
-}
-
-export const removePostFromAPI = id => {
-  return async (dispatch) => {
+export function removePostFromAPI(id) {
+  return async function (dispatch) {
     await axios.delete(`${API_URL}/${id}`);
-    dispatch(removePost(id));
+    return dispatch(removePost(id));
   };
 }
 
-const removePost = postId => {
+function removePost(postId) {
   return {
     type: REMOVE_POST,
     postId
   };
 }
 
-export const sendVoteToAPI = (id, direction) => {
-  return async (dispatch) => {
-    const response = await axios.post(`${API_URL}/${id}/vote/${direction}`);
-    dispatch(vote(id, response.data.votes));
+export function updatePostInAPI(id, title, description, body) {
+  return async function (dispatch) {
+    const response = await axios.put(`${API_URL}/${id}`, {
+      title,
+      description,
+      body
+    });
+    return dispatch(updatePost(response.data));
   };
 }
 
-const vote = (postId, votes) => {
+function updatePost(post) {
+  return {
+    type: UPDATE_POST,
+    post,
+  };
+}
+
+export function sendVoteToAPI(id, direction) {
+  return async function (dispatch) {
+    const response = await axios.post(`${API_URL}/${id}/vote/${direction}`);
+    return dispatch(vote(id, response.data.votes));
+  };
+}
+
+function vote(postId, votes) {
   return {
     type: VOTE,
     postId: postId,
@@ -91,32 +91,28 @@ const vote = (postId, votes) => {
   };
 }
 
-export const sendCommentToAPI = (postId, text) => {
-  return async (dispatch) => {
-    let res = await axios.post(`${API_URL}/${params.postId}/comments`, { text });
-    dispatch(addComment(postId, result.data));
-  };
-}
-
-const addComment = (postId, comment) => {
-  return {
-    type: ADD_COMMENT,
-    postId,
-    comment
-  };
-}
-
-export const removeCommentFromAPI = (postId, commentId) => {
-  return async (dispatch) => {
+export function removeCommentFromAPI(postId, commentId) {
+  return async function (dispatch) {
     await axios.delete(`${API_URL}/${postId}/comments/${commentId}`);
-    dispatch(removeComment(postId, commentId));
+    return dispatch(removeComment(postId, commentId));
   };
 }
 
-const removeComment = (postId, commentId) => {
+function removeComment(postId, commentId) {
   return {
     type: REMOVE_COMMENT,
     postId,
     commentId,
   };
+}
+
+export function sendCommentToAPI(postId, text) {
+  return async function (dispatch) {
+    const result = await axios.post(`${API_URL}/${postId}/comments/`, { text });
+    return dispatch(addComment(postId, result.data));
+  };
+}
+
+function addComment(postId, comment) {
+  return { type: ADD_COMMENT, postId, comment };
 }

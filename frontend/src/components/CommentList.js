@@ -1,34 +1,21 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { deleteCommentFromAPI } from './actions';
+import React from 'react';
+import Comment from "./Comment"
+/** CommentList: shows list of comments passed down as props.
+ *
+ * Comments can be deleted by clicking next to them; this is handled by
+ * the parent.
+ *
+ */
 
-const CommentList = () => {
-  const { postId } = useParams()
-  const comments = useSelector(st => st.posts[postId].comments)
-  const dispatch = useDispatch();
-
-  const handleDeleteComment = (data) => {
-    dispatch(deleteCommentFromAPI(data));
-  }
-
-  const showComments = () => (
-    comments.map(comment => (
-      <p key={comment.id}>
-        <i
-          className="fa fa-times text-danger mr-2"
-          onClick={() => handleDeleteComment({ postId, commentId: comment.id })}
-        />
-        {comment.text}
-      </p>
-    ))
-  );
-
+function CommentList({comments, deleteComment}) {
   return (
-    <div className="CommentList">
-      {showComments()}
-    </div>
-  )
+    comments.map(c => (
+      <Comment key={c.id} id={c.id} text={c.text} deleteComment={deleteComment}/>
+    )));
 }
+
+CommentList.defaultProps = {
+  comments: []
+};
 
 export default CommentList;
