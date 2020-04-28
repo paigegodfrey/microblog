@@ -1,19 +1,12 @@
 import React from 'react';
 import "./PostDisplay.css";
 
-/** Display a post:
- *
- * - show edit/delete buttons (& call parent on action)
- * - show vote count and +/- buttons (& call parent on action)
- *
- */
-
-function PostDisplay({doVote, toggleEdit, deletePost, post}) {
-  function doVoteUp() {
+const PostDisplay = ({doVote, toggleEdit, deletePost, post}) => {
+  const doVoteUp = () => {
     doVote("up");
   }
 
-  function doVoteDown() {
+  const doVoteDown = () => {
     doVote("down");
   }
 

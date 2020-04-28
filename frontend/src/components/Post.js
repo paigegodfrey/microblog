@@ -81,15 +81,19 @@ const Post = () => {
 
       {showEditForm
         ? <PostForm post={post} save={edit} />
-        : <PostDisplay post={post}
-          toggleEdit={toggleEdit}
-          deletePost={deletePost}
-          doVote={vote} />}
+        : <PostDisplay 
+            post={post}
+            toggleEdit={toggleEdit}
+            deletePost={deletePost}
+            doVote={vote} 
+          />}
 
       <section className="Post-comments mb-4">
         <h4>Comments</h4>
-        <CommentList comments={post.comments}
-          deleteComment={deleteComment} />
+        <CommentList 
+          comments={post.comments}
+          deleteComment={deleteComment} 
+        />
         <CommentForm submitCommentForm={addComment} />
       </section>
 

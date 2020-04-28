@@ -19,7 +19,7 @@ const NewPost = () => {
 
   return (
     <main>
-      <h1>New Post</h1>
+      <h2>New Post</h2>
       <PostForm post={EMPTY_POST_DATA} save={add} />
     </main>
   );
