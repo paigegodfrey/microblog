@@ -1,37 +1,40 @@
 /** MicroBlog express app. */
 
+
 const express = require("express");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
-const postsRoutes = require("./routes/posts");
-const postCommentsRoutes = require("./routes/postComments");
-const cors = require("cors");
-
 const app = express();
-
-app.use(morgan("tiny"));
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+const cors = require("cors");
+app.use(express.json());
 app.use(cors());
 
-app.use("/api/posts/:post_id/comments", postCommentsRoutes);
+// add logging system
+
+const morgan = require("morgan");
+app.use(morgan("tiny"));
+
+
+const postsRoutes = require("./routes/posts");
+const postCommentsRoutes = require("./routes/postComments");
+
 app.use("/api/posts", postsRoutes);
+app.use("/api/posts/:post_id/comments", postCommentsRoutes);
 
-
-/** 404 Not Found handler. */
+/** 404 handler */
 
 app.use(function (req, res, next) {
   const err = new Error("Not Found");
   err.status = 404;
-  next(err);
+  return next(err);
 });
 
-/** Generic error handler. */
+/** general error handler */
 
 app.use(function (err, req, res, next) {
   if (err.stack) console.error(err.stack);
 
-  res.status(err.status || 500).json({
+  res.status(err.status || 500);
+  
+  return res.json({
     message: err.message,
   });
 });
