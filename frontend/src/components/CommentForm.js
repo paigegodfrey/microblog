@@ -27,7 +27,7 @@ const CommentForm = ({ submitCommentForm }) => {
             value={text}
           />
         </div>
-        <button className="btn btn-primary">Add</button>
+        <button onSubmit={handleSubmit} className="btn btn-primary float-right">Add</button>
       </form>
     </div>
   );

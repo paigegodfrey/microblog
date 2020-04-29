@@ -51,8 +51,8 @@ const PostForm = ({ post, save }) => {
           rows={10}
           value={postData.body} />
       </div>
-      <button onClick={cancel} className="btn btn-outline-primary">Cancel</button>
-      <button className="btn btn-primary float-right">Save</button>
+      <div onClick={cancel} className="btn btn-outline-primary">Cancel</div>
+      <button onSubmit={handleSubmit} className="btn btn-primary float-right">Save</button>
     </form>
   );
 }
