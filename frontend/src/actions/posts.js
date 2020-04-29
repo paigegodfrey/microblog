@@ -9,7 +9,8 @@ import {
   REMOVE_COMMENT
 } from "./types";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/posts";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+const API_URL = `${BASE_URL}/api/posts`;
 
 
 export const getPostFromAPI = id => {
