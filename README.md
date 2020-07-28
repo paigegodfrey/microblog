@@ -7,16 +7,28 @@ Utilizes: React, React Hooks, Redux, Redux Thunk, Bootstrap, Node, Express, and 
 Live demo: https://microblog-react-app.herokuapp.com/
 
 ## Getting Started
-To clone the repository run the following command:
+Clone the repository and set up the database:
 
 ```
 git clone https://github.com/paigegodfrey/microblog.git
+createdb microblog
+psql microblog < data.sql
 ```
 
-In the project directory please run:
+Start the backend server:
 
 ```
+cd backend/
+npm install
+nodemon
+```
+
+Run the frontend:
+
+```
+cd frontend/
 npm install
 npm start
 ```
 
+This was a pair programming project, with collaborator: https://github.com/martinjwkim
