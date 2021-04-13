@@ -1,22 +1,34 @@
 # Microblog
 
-Microblog is a simple app that allows users to create/modify blog posts and add/delete comments. The app uses Redux and Redux Thunk to manage state, handle prop-drilling, and dispatch actions asynchronously.
+Microblog is a full-stack blogging application that allows users to create blog posts, add comments, and rank posts by votes. Blog titles and posts are stored in separate data structures in Redux store, to optimize homepage load speed.
 
-The frontend is built with React and styled with Bootstrap, and the backend runs on Node/Express and uses a PostgreSQL database.
+Utilizes: React, React Hooks, Redux, Redux Thunk, Bootstrap, Node, Express, and PostgreSQL.
 
 Live demo: https://microblog-react-app.herokuapp.com/
 
 ## Getting Started
-To clone the repository run the following command:
+Clone the repository and set up the database:
 
 ```
 git clone https://github.com/paigegodfrey/microblog.git
+createdb microblog
+psql microblog < data.sql
 ```
 
-In the project directory please run:
+Start the backend server:
 
 ```
+cd backend/
+npm install
+nodemon
+```
+
+Run the frontend:
+
+```
+cd frontend/
 npm install
 npm start
 ```
 
+This was a pair programming project, with collaborator: https://github.com/martinjwkim
