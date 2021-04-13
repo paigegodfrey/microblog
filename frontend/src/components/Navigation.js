@@ -8,8 +8,8 @@ const Navigation = () => {
       <h1 className="display-4">Microblog</h1>
       <p className="lead">Start blogging today!</p>
       <nav>
-        <NavLink exact to="/">Blog</NavLink>
-        <NavLink exact to="/new">Add a new post</NavLink>
+        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/new">Create Post</NavLink>
       </nav>
     </header>
   );
