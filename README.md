@@ -4,7 +4,7 @@ Microblog is a full-stack blogging application that allows users to create blog 
 
 Utilizes: React, React Hooks, Redux, Redux Thunk, Bootstrap, Node, Express, and PostgreSQL.
 
-Live demo: https://microblog-react-app.herokuapp.com/
+Live demo: http://microblog.surge.sh/
 
 ## Getting Started
 Clone the repository and set up the database:
