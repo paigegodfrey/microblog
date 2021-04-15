@@ -1,7 +1,10 @@
-nav a { 
-  margin-right: 1em;
+.subheading {
+  line-height: 1.1;
+  font-size: 24px;
 }
 
-nav a.active { 
-  font-weight: bold; 
+nav a { 
+  margin: 0.8em;
+  margin-bottom: 0;
+  width: 150px;
 }
