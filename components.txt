@@ -1,0 +1,18 @@
+App
+├── Navigation
+└─┬ Routes
+  ├─┬ Home
+  │ └─┬ TitleList
+  │   └── TitleCard
+  ├─┬ NewPost
+  │ └── PostForm
+  ├─┬ Post
+  │ ├── PostForm
+  │ ├── PostDisplay
+  │ ├── CommentList
+  │ │    └── Comment
+  │ └── CommentForm
+  └── NotFound
+
+
+
