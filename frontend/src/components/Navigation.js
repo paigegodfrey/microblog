@@ -5,7 +5,8 @@ import "./Navigation.css";
 const Navigation = () => {
   return (
     <header className="Navigation jumbotron mt-2 text-center">
-      <h1 className="display-3">Microblog</h1>
+      <h1 className="display-4">Microblog</h1>
+      <hr/>
       <p className="subheading lead">Start blogging today!</p>
       <nav>
         <div className="btn-group-justified">

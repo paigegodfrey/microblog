@@ -1,10 +1,14 @@
+hr {
+  max-width: 400px;
+}
+
 .subheading {
   line-height: 1.1;
   font-size: 24px;
 }
 
 nav a { 
-  margin: 0.8em;
+  margin: 0.7em;
   margin-bottom: 0;
   width: 150px;
 }

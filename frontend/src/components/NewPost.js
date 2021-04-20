@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { sendPostToAPI } from "../actions/posts";
@@ -6,6 +6,8 @@ import PostForm from "../components/PostForm";
 import "./NewPost.css";
 
 const NewPost = () => {
+
+  const [modalShowing, setModalShowing] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
