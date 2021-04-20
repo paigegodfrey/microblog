@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { sendPostToAPI } from "../actions/posts";
-import PostForm from "../components/PostForm";
-import "./NewPost.css";
+import PostForm from "./PostForm";
+import "./PostModal.css";
 
-const NewPost = () => {
+const PostModal = () => {
+
+  const [modalShowing, setModalShowing] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,10 +21,10 @@ const NewPost = () => {
 
   return (
     <main>
-      <h2>New Post</h2>
+      <h2>Create Post</h2>
       <PostForm post={EMPTY_POST_DATA} save={add} />
     </main>
   );
 }
 
-export default NewPost;
+export default PostModal;
