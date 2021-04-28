@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { sendPostToAPI } from "../actions/posts";
 import PostForm from "./PostForm";
+import Modal from 'react-bootstrap/Modal';
 import "./PostModal.css";
 
-const PostModal = () => {
-
-  const [modalShowing, setModalShowing] = useState(false);
+const PostModal = ({ showModal, handleClose }) => {
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const EMPTY_POST_DATA = { title: "", description: "", body: "" };
 
   const add = ({ title, description, body }) => {
     dispatch(sendPostToAPI(title, description, body));
-    history.push("/");
   };
 
   return (
-    <main>
-      <h2>Create Post</h2>
-      <PostForm post={EMPTY_POST_DATA} save={add} />
-    </main>
+    <>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <PostForm post={EMPTY_POST_DATA} save={add} close={handleClose} />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 

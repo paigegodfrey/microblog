@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
 
-const PostForm = ({ post, save }) => {
+const PostForm = ({ post, save, close }) => {
 
-  const history = useHistory();
   const { title, description, body } = post;
   const [postData, setPostData] = useState({ title, description, body });
 
@@ -18,11 +16,8 @@ const PostForm = ({ post, save }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     save(postData);
+    close();
   }
-
-  const cancel = () => {
-    history.push("/");
-  };
 
   return (
     <form className="mb-4" onSubmit={handleSubmit}>
@@ -32,7 +27,8 @@ const PostForm = ({ post, save }) => {
           id="editform-title"
           name="title"
           className="form-control"
-          value={postData.title} />
+          value={postData.title} 
+          required />
       </div>
       <div className="form-group">
         <label htmlFor="editform-description">Description:</label>
@@ -40,7 +36,8 @@ const PostForm = ({ post, save }) => {
           id="editform-description"
           name="description"
           className="form-control"
-          value={postData.description} />
+          value={postData.description} 
+          required />
       </div>
       <div className="form-group">
         <label htmlFor="editform-body">Body:</label>
@@ -51,7 +48,7 @@ const PostForm = ({ post, save }) => {
           rows={10}
           value={postData.body} />
       </div>
-      <div onClick={cancel} className="btn btn-outline-primary">Cancel</div>
+      <div onClick={close} className="btn btn-outline-primary">Cancel</div>
       <button onSubmit={handleSubmit} className="btn btn-primary float-right">Save</button>
     </form>
   );

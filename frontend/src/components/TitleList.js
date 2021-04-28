@@ -34,7 +34,7 @@ const TitleList = () => {
   }
 
   return (
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3">
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 mb-4">
       {titles.map(title => (
         <TitleCard key={title.id} titleData={title} vote={vote}/>
       ))}

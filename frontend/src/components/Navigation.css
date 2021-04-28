@@ -7,7 +7,7 @@ hr {
   font-size: 24px;
 }
 
-nav a { 
+nav a, span { 
   margin: 0.7em;
   margin-bottom: 0;
   width: 150px;
