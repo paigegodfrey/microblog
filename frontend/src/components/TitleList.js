@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTitlesFromAPI } from '../actions/titles';
 import { sendVoteToAPI } from "../actions/posts";
-import { HashLoader } from "react-spinners";
+import { PropagateLoader } from "react-spinners";
 import TitleCard from './TitleCard';
 
 const TitleList = () => {
@@ -24,8 +24,8 @@ const TitleList = () => {
   }
 
   if (isLoading) return (
-    <div className="fade-loader-container d-flex align-items-center justify-content-center" style={{ height: '50vh' }}>
-      <HashLoader size='50px' color="#123abc" />
+    <div className="fade-loader-container d-flex align-items-center justify-content-center"  style={{ height: '30vh' }}>
+      <PropagateLoader size='15px' color="#123abc" />
     </div>
   );
 

@@ -14,6 +14,7 @@ import PostForm from "../components/PostForm";
 import CommentList from "../components/CommentList";
 import PostDisplay from "../components/PostDisplay";
 import CommentForm from "../components/CommentForm";
+import { PropagateLoader } from "react-spinners";
 
 const Post = () => {
 
@@ -74,7 +75,11 @@ const Post = () => {
     dispatch(removeCommentFromAPI(postId, commentId));
   }
 
-  if (!post) return <p>Loading</p>;
+  if (!post) return (
+    <div className="fade-loader-container d-flex align-items-center justify-content-center"  style={{ height: '30vh' }}>
+      <PropagateLoader size='15px' color="#123abc" />
+    </div>
+  );
 
   return (
     <div className="Post">
