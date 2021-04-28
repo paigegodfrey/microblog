@@ -15,19 +15,21 @@ const CommentForm = ({ submitCommentForm }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
+      <form className="form-inline" onSubmit={handleSubmit}>
+        <div className="input-group flex-grow-1">
+          <input className="form-control"
             onChange={handleChange}
-            id="commentform-text"
+            id="comment-form-text"
             name="text"
-            size="50"
             placeholder="New Comment"
-            className="form-control"
             value={text}
           />
+          <div className="input-group-append input-group-btn">
+            <button className="btn btn-primary" style={{width: '70px'}}>
+              Add
+            </button>
+          </div>
         </div>
-        <button onSubmit={handleSubmit} className="btn btn-primary float-right">Add</button>
       </form>
     </div>
   );

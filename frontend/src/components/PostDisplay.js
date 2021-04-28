@@ -14,7 +14,7 @@ const PostDisplay = ({doVote, toggleEdit, deletePost, post}) => {
 
   return (
     <div className="PostDisplay">
-        <div>
+        <div className="mt-4">
           <h2>{title}</h2>
           <p><i>{description}</i></p>
           <div>{body}</div>
