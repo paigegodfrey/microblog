@@ -1,11 +1,11 @@
 App
-├── Navigation
+├─┬ Navigation
+│ └─┬ PostModal
+│   └── PostForm
 └─┬ Routes
   ├─┬ Home
   │ └─┬ TitleList
   │   └── TitleCard
-  ├─┬ NewPost
-  │ └── PostForm
   ├─┬ Post
   │ ├── PostForm
   │ ├── PostDisplay
