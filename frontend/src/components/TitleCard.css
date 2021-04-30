@@ -1,0 +1,11 @@
+.card-title {
+  font-weight: 600;
+}
+
+div a {
+  color: black;
+}
+
+div a:hover { 
+  text-decoration: none;
+}

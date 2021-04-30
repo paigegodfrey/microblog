@@ -1,20 +1,21 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import "./TitleCard.css";
 
-const TitleCard = ({titleData, vote}) => {
+const TitleCard = ({ titleData, vote }) => {
   const { id, title, description, votes } = titleData;
 
   return (
     <div className="TitleCard col mt-4">
       <div className="card">
-        <div className="card-body">
-          <div className="card-title">
-            <Link to={"/" + id}>{title}</Link>
+        <Link to={"/" + id}>
+          <div className="card-body">
+            <div className="card-title">{title}</div>
+            <div className="card-text">
+              <i>{description}</i>
+            </div>
           </div>
-          <div className="card-text">
-            <i>{description}</i>
-          </div>
-        </div>
+        </Link>
         <div className="card-footer">
           <small>{votes} votes</small>
           <i className="fas fa-thumbs-up text-success ml-2"
