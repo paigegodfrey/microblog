@@ -76,9 +76,14 @@ const Post = () => {
   }
 
   if (!post) return (
-    <div className="fade-loader-container d-flex align-items-center justify-content-center"  style={{ height: '30vh' }}>
-      <PropagateLoader size='15px' color="#123abc" />
-    </div>
+    <>
+      <div className="text-center mt-4" style={{ fontSize: '18px' }}>Waiting for Heroku server...</div>
+      <div className="d-flex align-items-center justify-content-center" style={{ height: '30vh' }}>
+        <div className="fade-loader-container text-center">
+          <PropagateLoader size='15px' color="#123abc" />
+        </div>
+      </div>
+    </>
   );
 
   return (

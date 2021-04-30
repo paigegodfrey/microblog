@@ -24,19 +24,24 @@ const TitleList = () => {
   }
 
   if (isLoading) return (
-    <div className="fade-loader-container d-flex align-items-center justify-content-center"  style={{ height: '30vh' }}>
-      <PropagateLoader size='15px' color="#123abc" />
-    </div>
+    <>
+      <div className="text-center mt-4" style={{ fontSize: '18px' }}>Waiting for Heroku server...</div>
+      <div className="d-flex align-items-center justify-content-center" style={{ height: '30vh' }}>
+        <div className="fade-loader-container text-center">
+          <PropagateLoader size='15px' color="#123abc" />
+        </div>
+      </div>
+    </>
   );
 
   if (!isLoading && titles.length === 0) {
-    return <b>Please add a post!</b>;
+    return <p className="lead mt-4" style={{ fontSize: '18px' }}>Please add a post!</p>;
   }
 
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 mb-4">
       {titles.map(title => (
-        <TitleCard key={title.id} titleData={title} vote={vote}/>
+        <TitleCard key={title.id} titleData={title} vote={vote} />
       ))}
     </div>
   );
