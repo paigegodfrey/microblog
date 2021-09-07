@@ -90,7 +90,7 @@ const Post = () => {
     <div className="Post">
 
       {showEditForm
-        ? <PostForm post={post} save={edit} />
+        ? <PostForm post={post} save={edit} close={toggleEdit} />
         : <PostDisplay 
             post={post}
             toggleEdit={toggleEdit}
