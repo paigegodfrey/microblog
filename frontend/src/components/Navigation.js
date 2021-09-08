@@ -11,7 +11,7 @@ const Navigation = () => {
   const handleShow = () => setShowPostModal(true);
 
   return (
-    <div className="Navigation jumbotron mt-2 mb-auto text-center">
+    <div className="Navigation jumbotron mt-2 mb-4 text-center">
       <h1 className="display-4">Microblog</h1>
       <hr />
       <p className="subheading lead">Start blogging today!</p>
